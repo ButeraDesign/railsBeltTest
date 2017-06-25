@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: railsBeltTest_production
-  username: railsBeltTest
+  username: ubuntu
   password: <%= ENV['RAILSBELTTEST_DATABASE_PASSWORD'] %>

@@ -1,0 +1,47 @@
+<br>
+<div class = "container">
+  <div class = "row">
+    <div class="col-md-9">
+    </div>
+    <div class="col-md-3">
+      <form class="table well" action="/sessions/<%=(session[:user_id])%>" method='post'>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="delete">
+        <input type='submit' value='Logoff' />
+      </form>
+    </div>
+  </div>
+
+  <div class = "row">
+
+    <div class="col-md-9">
+        <h2>Hi: <%= @user.first_name %></h2>
+    </div>
+  </div>
+
+<br><br>
+<div class = "row">
+
+<div class="col-md-9">
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Seller</th>
+    <th>Date Posted</th>
+    <th>Amount</th>
+    <th>Action</th>
+  </tr>
+<% @shoesForSale.each do |shoe| %>
+  <tr>
+    <td><%= shoe.name %></td>
+    <td><%= shoe.user.first_name %></td>
+    <td><%= shoe.created_at %></td>
+    <td><%= shoe.amount %></td>
+    <td><%= link_to "Buy", shoe, :method => :patch %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+</div>
+
+</div> <!-- end container ->

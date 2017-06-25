@@ -1,7 +1,10 @@
-<div class="col-md-6 col-md-offset-2 well">
+<div class = "container">
+<div class = "row">
+
+<div class="col-md-6 well">
 <h1>Join</h1>
-<% if flash[:errors] %>
-	<% flash[:errors].each do |e| %>
+<% if flash[:errorsUser] %>
+	<% flash[:errorsUser].each do |e| %>
 		<p><%= e %></p>
 	<% end %>
 <% end %>
@@ -15,4 +18,25 @@
 
   <input type='submit' value='Join' />
 </form>
+</div>
+
+<div class="col-md-6  well">
+
+<h1>Login Screen</h1>
+<% if flash[:errorsLogin] %>
+	<% flash[:errorsLogin].each do |e| %>
+		<p><%= e %></p>
+	<% end %>
+<% end %>
+<form class="table well" action='/sessions/' method='post'>
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  Email:<input type='text' name='email'  /><br>
+  Password:<input type='text' name='password'  /><br>
+
+  <input type='submit' value='Login' />
+</form>
+
+</div>
+
+</div>
 </div>

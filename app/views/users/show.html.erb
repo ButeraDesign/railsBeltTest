@@ -15,8 +15,91 @@
   <div class = "row">
 
     <div class="col-md-9">
-        <h2>User: <%= @user.first_name %> Has Logged In</h2>
+        <h2>Hi: <%= @user.first_name %></h2>
     </div>
   </div>
+
+  <div class = "row">
+    <div class="col-md-9">
+        <h3>Sell Shoes</h3>
+        <form class="table well" action='/shoes/' method='post'>
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          Name:<input type='text' name='name'  /><br>
+          Amount:<input type='number' name='amount' value='0.00'/><br>
+          <input type='submit' value='Sell' />
+        </form>
+  </div>
+ </div>
+<br><br>
+
+  <div class = "row">
+
+  <div class="col-md-9">
+  <table>
+    <tr>
+      <th>Product</th>
+      <th>Date Posted</th>
+      <th>Amount</th>
+      <th>Action</th>
+    </tr>
+  <% @shoesForSale.each do |shoe| %>
+    <tr>
+      <td><%= shoe.name %></td>
+      <td><%= shoe.created_at %></td>
+      <td><%= shoe.amount %></td>
+      <td>Action</td>
+    </tr>
+  <% end %>
+  </table>
+</div>
+</div>
+<br><br>
+<div class = "row">
+
+<div class="col-md-9">
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Date Bought</th>
+    <th>Buyer</th>
+    <th>Amount</th>
+  </tr>
+<% @shoesSold.each do |shoe| %>
+  <tr>
+    <td><%= shoe.name %></td>
+    <td><%= shoe.updated_at %></td>
+    <td><%= shoe.buyer.first_name %></td>
+    <td><%= shoe.amount %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+</div>
+
+<br><br>
+<div class = "row">
+
+<div class="col-md-9">
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Date Bought</th>
+    <th>Seller</th>
+    <th>Amount</th>
+  </tr>
+<% @shoesBought.each do |shoe| %>
+  <tr>
+    <td><%= shoe.name %></td>
+    <td><%= shoe.updated_at %></td>
+    <td><%= shoe.user.first_name %></td>
+    <td><%= shoe.amount %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+</div>
+
+
+
 
 </div> <!-- end container ->

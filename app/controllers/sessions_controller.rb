@@ -14,12 +14,12 @@ class SessionsController < ApplicationController
 
     if @user
       session[:user_id] = @user.id
-      redirect_to "/users/#{@user.id}"
+      redirect_to "/dashboard/#{@user.id}"
     else
       puts 'Create Error'
-      flash[:errors] = ["Invalid Email or PW"]
+      flash[:errorsLogin] = ["Invalid Email or PW"]
       # redirect_to :back
-      redirect_to "/sessions/new"
+      redirect_to "/users/new"
     end
 
   end

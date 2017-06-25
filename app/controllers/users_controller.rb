@@ -8,6 +8,11 @@ class UsersController < ApplicationController
   def show
     puts 'In Show'
     @user = User.find(session[:user_id])
+    @allShoes = Shoe.all
+    @shoesForSale = Shoe.all.where(sold: false, seller_id: session[:user_id])
+    @shoesSold = Shoe.all.where(sold: true, seller_id: session[:user_id])
+    @shoesBought = Shoe.all.where(sold: true, buyer_id: session[:user_id])
+
     #binding.pry
   end
 
@@ -15,16 +20,18 @@ class UsersController < ApplicationController
     #POST from form, does the create
     puts 'In Create'
     #formParams = params[:user]
-    binding.pry
+    #binding.pry
     @user = User.new(user_params)
-    binding.pry
+    #binding.pry
 
     if @user.save
       #user created, have them logon now (or maybe log them in and go to show?)
-      redirect_to "/sessions/new"
+      session[:user_id] = @user.id
+      redirect_to "/dashboard/#{@user.id}"
+      #redirect_to "/sessions/new"
     else
       puts 'Create Error'
-      flash[:errors] = @user.errors.full_messages
+      flash[:errorsUser] = @user.errors.full_messages
       # redirect_to :back
       redirect_to "/users/new"
     end
